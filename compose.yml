@@ -5,6 +5,8 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - ${PORT_HOST}:${DB_PORT}:${DB_PORT}
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -18,22 +20,22 @@ services:
       - forum-psql:/var/lib/postgresql/data
 
   frontend:
-    platform: linux/arm64/v8
     container_name: forum-frontend
     image: "celeschai/forumfront"
+    #image: "celeschai/forumfrontamd" (for amd64)
     ports:
-      - ${HOST}:${FRONT_PORT}:${FRONT_PORT}
+      - ${PORT_HOST}:${FRONT_PORT}:${FRONT_PORT}
     stdin_open: true
     environment:
       - REACT_APP_HOST=${HOST}
       - REACT_APP_BACK_PORT=${BACK_PORT}
 
   backend:
-    platform: linux/arm64/v8
     container_name: forum-backend
     image: "celeschai/forumback"
+    #image: "celeschai/forumbackamd"
     ports:
-      - ${HOST}:${BACK_PORT}:${BACK_PORT}
+      - ${PORT_HOST}:${BACK_PORT}:${BACK_PORT}
     restart: on-failure
     depends_on:
       postgres:
