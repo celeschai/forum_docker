@@ -21,7 +21,7 @@ services:
 
   frontend:
     container_name: forum-frontend
-    image: "celeschai/forum-frontreactts"
+    image: "celeschai/forumfrontreact"
     #image: "celeschai/forumfrontamd" (for amd64)
     ports:
       - ${PORT_HOST}:${FRONT_PORT}:${FRONT_PORT}
@@ -32,7 +32,7 @@ services:
 
   backend:
     container_name: forum-backend
-    image: "celeschai/forum-backgo"
+    image: "celeschai/forumbackgo"
     #image: "celeschai/forumbackamd"
     ports:
       - ${PORT_HOST}:${BACK_PORT}:${BACK_PORT}
