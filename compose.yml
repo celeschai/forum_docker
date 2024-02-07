@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - ${PORT_HOST}:${DB_PORT}:${DB_PORT}
+      - ${DB_PORT}:${DB_PORT}
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -24,7 +24,7 @@ services:
     image: "celeschai/forumfrontreact"
     #image: "celeschai/forumfrontamd" (for amd64)
     ports:
-      - ${PORT_HOST}:${FRONT_PORT}:${FRONT_PORT}
+      - ${FRONT_PORT}:${FRONT_PORT}
     stdin_open: true
     environment:
       - REACT_APP_HOST=${HOST}
@@ -35,7 +35,7 @@ services:
     image: "celeschai/forumbackgo"
     #image: "celeschai/forumbackamd"
     ports:
-      - ${PORT_HOST}:${BACK_PORT}:${BACK_PORT}
+      - ${BACK_PORT}:${BACK_PORT}
     restart: on-failure
     depends_on:
       postgres:
